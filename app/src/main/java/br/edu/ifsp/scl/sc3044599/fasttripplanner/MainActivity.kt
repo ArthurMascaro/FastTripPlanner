@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import br.edu.ifsp.scl.sc3044599.fasttripplanner.ui.FastTripPlannerApp
+import br.edu.ifsp.scl.sc3044599.fasttripplanner.screens.FastTripPlannerApp
 import br.edu.ifsp.scl.sc3044599.fasttripplanner.ui.theme.FastTripPlannerTheme
 
 class MainActivity : ComponentActivity() {

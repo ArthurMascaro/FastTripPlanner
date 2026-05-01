@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.sc3044599.fasttripplanner.ui
+package br.edu.ifsp.scl.sc3044599.fasttripplanner.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
-import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -23,7 +21,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -143,8 +140,8 @@ fun FastTripPlannerApp() {
            Row(
                 horizontalArrangement = Arrangement.End,
                 modifier = Modifier
-                     .fillMaxWidth()
-                     .padding(top = 16.dp)
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
            ) {
                Button(
                    onClick = {
