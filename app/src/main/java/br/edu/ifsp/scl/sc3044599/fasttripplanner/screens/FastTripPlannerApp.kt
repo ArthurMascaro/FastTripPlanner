@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.sc3044599.fasttripplanner.screens
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,15 +21,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.edu.ifsp.scl.sc3044599.fasttripplanner.activities.TripOptionsActivity
+import br.edu.ifsp.scl.sc3044599.fasttripplanner.domain.TripIntentKeys
+import br.edu.ifsp.scl.sc3044599.fasttripplanner.utils.TripFormValidator
 
 @Composable
 fun FastTripPlannerApp() {
+    val context = LocalContext.current
+
     var destination: String by rememberSaveable() { mutableStateOf("")}
     var destinationError: String? by rememberSaveable() { mutableStateOf(null) }
 
@@ -138,10 +145,10 @@ fun FastTripPlannerApp() {
            }
 
            Row(
-                horizontalArrangement = Arrangement.End,
+                horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.End),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp)
+                    .padding(top = 16.dp, end = 4.dp)
            ) {
                Button(
                    onClick = {
@@ -154,6 +161,31 @@ fun FastTripPlannerApp() {
                    }
                ) {
                    Text("Limpar")
+               }
+
+               Button(
+                   onClick = {
+                       val tripValidator = TripFormValidator();
+                       destinationError = tripValidator.validateDestination(destination)
+                       daysError = tripValidator.validateDays(days)
+                       dailyBudgetError = tripValidator.validateDailyBudget(dailyBudget)
+
+                       val has_error = destinationError != null ||
+                               daysError != null ||
+                               dailyBudgetError != null
+
+                        if(!has_error){
+                            val intent = Intent(context, TripOptionsActivity::class.java)
+
+                            intent.putExtra(TripIntentKeys.DESTINATION, destination)
+                            intent.putExtra(TripIntentKeys.DAYS, days)
+                            intent.putExtra(TripIntentKeys.DAILY_BUDGET, dailyBudget)
+
+                            context.startActivity(intent)
+                        }
+                   }
+               ) {
+                   Text("Avançar")
                }
            }
        }
