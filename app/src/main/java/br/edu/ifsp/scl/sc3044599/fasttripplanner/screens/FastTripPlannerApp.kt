@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.edu.ifsp.scl.sc3044599.fasttripplanner.activities.TripOptionsActivity
 import br.edu.ifsp.scl.sc3044599.fasttripplanner.domain.TripIntentKeys
+import br.edu.ifsp.scl.sc3044599.fasttripplanner.utils.DoubleUtils
 import br.edu.ifsp.scl.sc3044599.fasttripplanner.utils.TripFormValidator
 
 @Composable
@@ -42,7 +43,7 @@ fun FastTripPlannerApp() {
     var days: Int by rememberSaveable() { mutableIntStateOf(0) }
     var daysError: String? by rememberSaveable() { mutableStateOf(null) }
 
-    var dailyBudget: Double by rememberSaveable() { mutableDoubleStateOf(0.0) }
+    var dailyBudget: String by rememberSaveable() { mutableStateOf("") }
     var dailyBudgetError: String? by rememberSaveable() { mutableStateOf(null) }
 
     val maxWidthModifier = Modifier.fillMaxWidth();
@@ -127,10 +128,12 @@ fun FastTripPlannerApp() {
                    fontSize = 16.sp
                )
                TextField(
-                   value = if(dailyBudget == 0.0) "" else dailyBudget.toString(),
-                   onValueChange = { dailyBudget = it.toDoubleOrNull() ?: 0.0 },
+                   value = dailyBudget,
+                   onValueChange = { value ->
+                       dailyBudget = value
+                   },
                    keyboardOptions = KeyboardOptions(
-                       keyboardType = KeyboardType.Number
+                       keyboardType = KeyboardType.Decimal
                    ),
                    isError = dailyBudgetError != null,
                    placeholder = { Text(text = "100.00") },
@@ -156,7 +159,7 @@ fun FastTripPlannerApp() {
                        destinationError = null
                        days = 0
                        daysError = null
-                       dailyBudget = 0.0
+                       dailyBudget = ""
                        dailyBudgetError = null
                    }
                ) {
@@ -177,9 +180,10 @@ fun FastTripPlannerApp() {
                         if(!has_error){
                             val intent = Intent(context, TripOptionsActivity::class.java)
 
+
                             intent.putExtra(TripIntentKeys.DESTINATION, destination)
                             intent.putExtra(TripIntentKeys.DAYS, days)
-                            intent.putExtra(TripIntentKeys.DAILY_BUDGET, dailyBudget)
+                            intent.putExtra(TripIntentKeys.DAILY_BUDGET, DoubleUtils().normalizeDouble(dailyBudget))
 
                             context.startActivity(intent)
                         }
