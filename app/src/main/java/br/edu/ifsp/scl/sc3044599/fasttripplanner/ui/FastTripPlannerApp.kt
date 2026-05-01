@@ -27,6 +27,15 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun FastTripPlannerApp() {
+    var destination: String by rememberSaveable() { mutableStateOf("")}
+    var destinationError: String? by rememberSaveable() { mutableStateOf(null) }
+
+    var days: Int by rememberSaveable() { mutableIntStateOf(0) }
+    var daysError: String? by rememberSaveable() { mutableStateOf(null) }
+
+    var dailyBudget: Double by rememberSaveable() { mutableDoubleStateOf(0.0) }
+    var dailyBudgetError: String? by rememberSaveable() { mutableStateOf(null) }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
