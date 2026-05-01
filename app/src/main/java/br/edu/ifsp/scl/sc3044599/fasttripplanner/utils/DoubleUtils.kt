@@ -1,7 +1,9 @@
 package br.edu.ifsp.scl.sc3044599.fasttripplanner.utils
 
-class DoubleUtils {
+object DoubleUtils {
     fun normalizeDouble(value: String): Double {
-        return value.replace(",", ".").toDouble();
+        return value
+            .replace(",", ".")
+            .toDoubleOrNull() ?: 0.0
     }
 }

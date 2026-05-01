@@ -168,10 +168,9 @@ fun FastTripPlannerApp() {
 
                Button(
                    onClick = {
-                       val tripValidator = TripFormValidator();
-                       destinationError = tripValidator.validateDestination(destination)
-                       daysError = tripValidator.validateDays(days)
-                       dailyBudgetError = tripValidator.validateDailyBudget(dailyBudget)
+                       destinationError = TripFormValidator.validateDestination(destination)
+                       daysError = TripFormValidator.validateDays(days)
+                       dailyBudgetError = TripFormValidator.validateDailyBudget(dailyBudget)
 
                        val has_error = destinationError != null ||
                                daysError != null ||
@@ -183,7 +182,7 @@ fun FastTripPlannerApp() {
 
                             intent.putExtra(TripIntentKeys.DESTINATION, destination)
                             intent.putExtra(TripIntentKeys.DAYS, days)
-                            intent.putExtra(TripIntentKeys.DAILY_BUDGET, DoubleUtils().normalizeDouble(dailyBudget))
+                            intent.putExtra(TripIntentKeys.DAILY_BUDGET, DoubleUtils.normalizeDouble(dailyBudget))
 
                             context.startActivity(intent)
                         }

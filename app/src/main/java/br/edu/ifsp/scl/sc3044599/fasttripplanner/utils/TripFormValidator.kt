@@ -1,6 +1,6 @@
 package br.edu.ifsp.scl.sc3044599.fasttripplanner.utils
 
-class TripFormValidator {
+object TripFormValidator {
     fun validateDestination(destination: String): String? {
         if (destination.isBlank()) {
             return "Destino é obrigatório"
@@ -27,7 +27,7 @@ class TripFormValidator {
             return "Orçamento diário deve ser um número válido"
         }
 
-        if(DoubleUtils().normalizeDouble(dailyBudget) <= 0) {
+        if(DoubleUtils.normalizeDouble(dailyBudget) <= 0) {
             return "Orçamento diário deve ser maior que zero"
         }
 
