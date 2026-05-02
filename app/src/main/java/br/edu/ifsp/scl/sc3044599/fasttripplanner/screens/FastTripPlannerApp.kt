@@ -71,7 +71,7 @@ fun FastTripPlannerApp() {
 
        Column(
             modifier = maxWidthModifier
-                .padding(top = 20.dp)
+                .padding(top = 10.dp)
        ) {
            Column(
                maxWidthModifier
