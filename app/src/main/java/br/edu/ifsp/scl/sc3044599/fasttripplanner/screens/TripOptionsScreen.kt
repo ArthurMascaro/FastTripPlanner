@@ -41,8 +41,7 @@ fun TripOptionsScreen(
     var hasTours by rememberSaveable { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = maxWidthModifier
             .fillMaxHeight()
     ) {
         // <-- Header -->

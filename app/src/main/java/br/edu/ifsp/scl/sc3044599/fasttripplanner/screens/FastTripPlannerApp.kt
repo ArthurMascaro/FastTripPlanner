@@ -49,8 +49,7 @@ fun FastTripPlannerApp() {
     val maxWidthModifier = Modifier.fillMaxWidth();
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = maxWidthModifier
             .fillMaxHeight()
         ) {
         // <-- Header -->
