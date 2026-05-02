@@ -28,10 +28,13 @@ import br.edu.ifsp.scl.sc3044599.fasttripplanner.domain.HostingType
 
 @Composable
 fun TripOptionsScreen(
-    destination: String,
-    days: Int,
-    dailyBudget: Double,
-    onReturnClick: () -> Unit = {}
+    onReturnClick: () -> Unit = {},
+    onCalculateClick: (
+        hostingType: HostingType,
+        hasFood: Boolean,
+        hasTransport: Boolean,
+        hasTours: Boolean
+    ) -> Unit = { _, _, _, _ -> }
 ) {
     val maxWidthModifier = Modifier.fillMaxWidth()
 
@@ -175,6 +178,20 @@ fun TripOptionsScreen(
             Button(onClick = onReturnClick) {
                 Text(text = "Voltar")
             }
+
+            Button(
+                onClick = {
+                    val hostingType = HostingType.valueOf(selectedHostingType)
+                    onCalculateClick(
+                        hostingType,
+                        hasFood,
+                        hasTransport,
+                        hasTours
+                    )
+                }
+            ) {
+                Text(text = "Calcular")
+            }
         }
     }
 }
@@ -182,9 +199,5 @@ fun TripOptionsScreen(
 @Preview(showBackground = true)
 @Composable
 fun TripOptionsScreenPreview() {
-    TripOptionsScreen(
-        destination = "Rio de Janeiro",
-        days = 5,
-        dailyBudget = 100.0
-    )
+    TripOptionsScreen()
 }
