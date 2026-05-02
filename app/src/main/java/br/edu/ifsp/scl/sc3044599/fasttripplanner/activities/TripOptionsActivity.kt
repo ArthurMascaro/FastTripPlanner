@@ -21,7 +21,7 @@ class TripOptionsActivity : ComponentActivity() {
                     destination = destination,
                     days = days,
                     dailyBudget = dailyBudget,
-                    on_return_click = {
+                    onReturnClick = {
                         finish()
                     }
                 )

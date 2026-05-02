@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -30,14 +31,14 @@ fun TripOptionsScreen(
     destination: String,
     days: Int,
     dailyBudget: Double,
-    on_return_click: () -> Unit = {}
+    onReturnClick: () -> Unit = {}
 ) {
-    val maxWidthModifier = Modifier.fillMaxWidth();
+    val maxWidthModifier = Modifier.fillMaxWidth()
 
     var selectedHostingType by rememberSaveable { mutableStateOf(HostingType.ECONOMIC.name) }
-    var hasFood by rememberSaveable() { mutableStateOf(false) }
-    var hasTransport by rememberSaveable() { mutableStateOf(false) }
-    var hasTours by rememberSaveable() { mutableStateOf(false) }
+    var hasFood by rememberSaveable { mutableStateOf(false) }
+    var hasTransport by rememberSaveable { mutableStateOf(false) }
+    var hasTours by rememberSaveable { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -60,6 +61,7 @@ fun TripOptionsScreen(
             HorizontalDivider()
         }
 
+        // <-- Seleção de tipo de hospedagem -->
         Column(
             modifier = maxWidthModifier
                 .padding(top = 10.dp)
@@ -113,13 +115,65 @@ fun TripOptionsScreen(
             }
         }
 
+        HorizontalDivider()
+
+        // <-- Seleção de serviços adicionais -->
+        Column(
+            modifier = maxWidthModifier
+                .padding(top = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "Serviços adicionais",
+                fontSize = 16.sp,
+                style = TextStyle(fontWeight = FontWeight.Bold)
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Checkbox(
+                    checked = hasTransport,
+                    onCheckedChange = { checked ->
+                        hasTransport = checked
+                    }
+                )
+                Text("Transporte")
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Checkbox(
+                    checked = hasFood,
+                    onCheckedChange = { checked ->
+                        hasFood = checked
+                    }
+                )
+                Text("Alimentação")
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Checkbox(
+                    checked = hasTours,
+                    onCheckedChange = { checked ->
+                        hasTours = checked
+                    }
+                )
+                Text("Passeios")
+            }
+        }
+
+
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.End),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp, end = 4.dp)
         ) {
-            Button(onClick = on_return_click) {
+            Button(onClick = onReturnClick) {
                 Text(text = "Voltar")
             }
         }
