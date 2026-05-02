@@ -27,7 +27,7 @@ class TripOptionsActivity : ComponentActivity() {
                         intent.putExtra(TripIntentKeys.DESTINATION, destination)
                         intent.putExtra(TripIntentKeys.DAYS, days)
                         intent.putExtra(TripIntentKeys.DAILY_BUDGET, dailyBudget)
-                        intent.putExtra(TripIntentKeys.HOSTING_TYPE, hostingType.name)
+                        intent.putExtra(TripIntentKeys.HOSTING_TYPE, hostingType)
                         intent.putExtra(TripIntentKeys.HAS_FOOD, hasFood)
                         intent.putExtra(TripIntentKeys.HAS_TRANSPORT, hasTransport)
                         intent.putExtra(TripIntentKeys.HAS_TOURS, hasTours)

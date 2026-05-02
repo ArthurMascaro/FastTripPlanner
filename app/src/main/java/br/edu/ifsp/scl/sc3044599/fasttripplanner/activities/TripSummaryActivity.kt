@@ -1,8 +1,10 @@
 package br.edu.ifsp.scl.sc3044599.fasttripplanner.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import br.edu.ifsp.scl.sc3044599.fasttripplanner.MainActivity
 import br.edu.ifsp.scl.sc3044599.fasttripplanner.domain.HostingType
 import br.edu.ifsp.scl.sc3044599.fasttripplanner.domain.TripIntentKeys
 import br.edu.ifsp.scl.sc3044599.fasttripplanner.screens.TripSummaryScreen
@@ -32,6 +34,11 @@ class TripSummaryActivity : ComponentActivity() {
                     hasTours = hasTours,
                     hostingType = hostingType,
                     onReturnClick = {
+                        finish()
+                    },
+                    onFinishClick = {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                         finish()
                     }
                 )
