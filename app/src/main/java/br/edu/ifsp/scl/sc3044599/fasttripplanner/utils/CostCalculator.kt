@@ -9,11 +9,11 @@ class CostCalculator(
     val hasTours: Boolean,
     val days: Int,
     val dailyBudget: Double,
-    val baseCost: Double = days * dailyBudget
+    val economicMode: Boolean,
 ) {
 
     fun calculateTotalCost(): Double {
-        return (baseCost * hostingMultiplier()) + foodTotal() + transportTotal() + toursTotal()
+        return (baseCost() * hostingMultiplier()) + foodTotal() + transportTotal() + toursTotal()
     }
 
     private fun hostingMultiplier(): Double {
@@ -29,6 +29,17 @@ class CostCalculator(
             return 120.00 * days
         }
         return 0.0
+    }
+
+    private fun baseCost(): Double {
+        return days * evaluatedDailyBudget()
+    }
+
+    private fun evaluatedDailyBudget(): Double {
+        if (economicMode){
+            return dailyBudget * 0.85
+        }
+        return  dailyBudget
     }
 
     private fun foodTotal(): Double {

@@ -33,8 +33,9 @@ fun TripOptionsScreen(
         hostingType: HostingType,
         hasFood: Boolean,
         hasTransport: Boolean,
-        hasTours: Boolean
-    ) -> Unit = { _, _, _, _ -> }
+        hasTours: Boolean,
+        economicMode: Boolean
+    ) -> Unit = { _, _, _, _, _ -> }
 ) {
     val maxWidthModifier = Modifier.fillMaxWidth()
 
@@ -42,6 +43,7 @@ fun TripOptionsScreen(
     var hasFood by rememberSaveable { mutableStateOf(false) }
     var hasTransport by rememberSaveable { mutableStateOf(false) }
     var hasTours by rememberSaveable { mutableStateOf(false) }
+    var economicMode by rememberSaveable() { mutableStateOf(false) }
 
     Column(
         modifier = maxWidthModifier
@@ -83,10 +85,11 @@ fun TripOptionsScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = selectedHostingType == HostingType.ECONOMIC.name,
+                        selected = economicMode || selectedHostingType == HostingType.ECONOMIC.name,
                         onClick = {
                             selectedHostingType = HostingType.ECONOMIC.name
-                        }
+                        },
+
                     )
                     Text("Econômica")
                 }
@@ -95,9 +98,11 @@ fun TripOptionsScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = selectedHostingType == HostingType.COMFORT.name,
+                        selected = !economicMode && selectedHostingType == HostingType.COMFORT.name,
                         onClick = {
-                            selectedHostingType = HostingType.COMFORT.name
+                            if(!economicMode) {
+                                selectedHostingType = HostingType.COMFORT.name
+                            }
                         }
                     )
                     Text("Conforto")
@@ -107,9 +112,11 @@ fun TripOptionsScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = selectedHostingType == HostingType.LUXURY.name,
+                        selected = !economicMode && selectedHostingType == HostingType.LUXURY.name,
                         onClick = {
-                            selectedHostingType = HostingType.LUXURY.name
+                            if(!economicMode) {
+                                selectedHostingType = HostingType.LUXURY.name
+                            }
                         }
                     )
                     Text("Luxo")
@@ -159,12 +166,37 @@ fun TripOptionsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Checkbox(
-                    checked = hasTours,
+                    checked = !economicMode && hasTours,
                     onCheckedChange = { checked ->
-                        hasTours = checked
+                        if(!economicMode) {
+                            hasTours = checked
+                        }
                     }
                 )
                 Text("Passeios")
+            }
+        }
+
+        HorizontalDivider()
+        Column(
+            modifier = maxWidthModifier
+                .padding(top = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Checkbox(
+                    checked = economicMode,
+                    onCheckedChange = { checked ->
+                        economicMode = checked
+                        if(checked){
+                            selectedHostingType = HostingType.ECONOMIC.name
+                            hasTours = false
+                        }
+                    }
+                )
+                Text("Modo economico")
             }
         }
 
@@ -186,7 +218,8 @@ fun TripOptionsScreen(
                         hostingType,
                         hasFood,
                         hasTransport,
-                        hasTours
+                        hasTours,
+                        economicMode
                     )
                 }
             ) {

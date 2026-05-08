@@ -28,6 +28,7 @@ fun TripSummaryScreen(
     hasFood: Boolean,
     hasTransport: Boolean,
     hasTours: Boolean,
+    economicMode: Boolean,
     hostingType: HostingType,
     onReturnClick: () -> Unit = {},
     onFinishClick: () -> Unit = {}
@@ -40,7 +41,8 @@ fun TripSummaryScreen(
         hasTransport = hasTransport,
         hasTours = hasTours,
         days = days,
-        dailyBudget = dailyBudget
+        dailyBudget = dailyBudget,
+        economicMode = economicMode
     )
 
     val totalCost = costCalculator.calculateTotalCost()
@@ -138,6 +140,7 @@ fun TripSummaryScreenPreview() {
         hasFood = false,
         hasTransport = false,
         hasTours = false,
-        hostingType = HostingType.ECONOMIC
+        hostingType = HostingType.ECONOMIC,
+        economicMode = false
     )
 }

@@ -22,7 +22,7 @@ class TripOptionsActivity : ComponentActivity() {
                     onReturnClick = {
                         finish()
                     },
-                    onCalculateClick = { hostingType, hasFood, hasTransport, hasTours ->
+                    onCalculateClick = { hostingType, hasFood, hasTransport, hasTours, economicMode ->
                         val intent = Intent(this, TripSummaryActivity::class.java)
                         intent.putExtra(TripIntentKeys.DESTINATION, destination)
                         intent.putExtra(TripIntentKeys.DAYS, days)
@@ -31,6 +31,7 @@ class TripOptionsActivity : ComponentActivity() {
                         intent.putExtra(TripIntentKeys.HAS_FOOD, hasFood)
                         intent.putExtra(TripIntentKeys.HAS_TRANSPORT, hasTransport)
                         intent.putExtra(TripIntentKeys.HAS_TOURS, hasTours)
+                        intent.putExtra(TripIntentKeys.ECONOMIC_MODE, economicMode)
                         startActivity(intent)
                     }
                 )

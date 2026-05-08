@@ -22,6 +22,7 @@ class TripSummaryActivity : ComponentActivity() {
         val hasFood = intent.getBooleanExtra(TripIntentKeys.HAS_FOOD, false)
         val hasTransport = intent.getBooleanExtra(TripIntentKeys.HAS_TRANSPORT, false)
         val hasTours = intent.getBooleanExtra(TripIntentKeys.HAS_TOURS, false)
+        val economicMode = intent.getBooleanExtra(TripIntentKeys.ECONOMIC_MODE, false)
 
         setContent {
             FastTripPlannerTheme {
@@ -33,6 +34,7 @@ class TripSummaryActivity : ComponentActivity() {
                     hasTransport = hasTransport,
                     hasTours = hasTours,
                     hostingType = hostingType,
+                    economicMode = economicMode,
                     onReturnClick = {
                         finish()
                     },
