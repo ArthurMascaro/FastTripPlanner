@@ -5,6 +5,8 @@ A ideia do app é permitir que o usuário informe alguns dados básicos da viage
 
 O projeto foi desenvolvido em Kotlin utilizando Jetpack Compose para a construção das telas.
 
+Video demonstrativo: https://www.youtube.com/watch?v=LaqDjRrGt-U
+
 ## Objetivo do projeto
 
 O objetivo principal deste projeto é praticar conceitos básicos de desenvolvimento mobile em Android, como:
