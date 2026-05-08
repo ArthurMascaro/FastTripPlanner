@@ -178,7 +178,6 @@ fun FastTripPlannerApp() {
                         if(!has_error){
                             val intent = Intent(context, TripOptionsActivity::class.java)
 
-
                             intent.putExtra(TripIntentKeys.DESTINATION, destination)
                             intent.putExtra(TripIntentKeys.DAYS, days)
                             intent.putExtra(TripIntentKeys.DAILY_BUDGET, DoubleUtils.normalizeDouble(dailyBudget))
